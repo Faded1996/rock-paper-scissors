@@ -1,6 +1,5 @@
 let playerCounter = 0;
 let computerCounter = 0;
-let roundWinner = "";
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3 + 1);
@@ -35,14 +34,13 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
 // event listener
 window.addEventListener('click', keyAction);
 
-
 const result = document.querySelector('div.result');
 
 function keyAction(e) {
     const pressedKeyValue = e.target.value;
     if (!pressedKeyValue) return;
 
-    if (computerCounter === 5 || playerCounter == 5) {
+    if (computerCounter === 5 || playerCounter === 5) {
         const newPara = document.createElement('div');
         newPara.textContent = computerCounter > playerCounter ? "YOU LOST THIS GAME" : "YOU WON THIS GAME!!!";
         result.appendChild(newPara);
@@ -57,7 +55,6 @@ function keyAction(e) {
         const newPara = document.createElement('div');
         newPara.textContent = playRound(pressedKeyValue);
         result.appendChild(newPara);
-
     }
 
 }
