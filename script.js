@@ -1,6 +1,5 @@
 let playerCounter = 0;
 let computerCounter = 0;
-let roundWinner = "";
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3 + 1);
@@ -14,36 +13,55 @@ function computerPlay() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection = computerPlay()) {
 
     if (playerSelection === computerSelection) {
-        return "It's a tie";
+        return `It's a tie. CURRENT: ${playerCounter} : ${computerCounter}`;
     } else if ((playerSelection === "ROCK" && computerSelection === "SCISSORS")
         || (playerSelection === "PAPER" && computerSelection === "ROCK")
         || (playerSelection === "SCISSORS" && computerSelection === "PAPER")) {
-        roundWinner = 'player';
-        return `You WON! ${playerSelection} beats ${computerSelection}`;
+        playerCounter++;
+        return `You WON! ${playerSelection} beats ${computerSelection}. CURRENT: ${playerCounter} : ${computerCounter}`;
     } else if ((computerSelection === "ROCK" && playerSelection === "SCISSORS")
         || (computerSelection === "PAPER" && playerSelection === "ROCK")
         || (computerSelection === "SCISSORS" && playerSelection === "PAPER")) {
-        roundWinner = 'computer';
-        return `You LOST! ${computerSelection} beats ${playerSelection}`;
+        computerCounter++;
+        return `You LOST! ${computerSelection} beats ${playerSelection} CURRENT: ${playerCounter} : ${computerCounter}`;
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerInputToUpperCase = prompt("take a turn", 'rock/paper/scissors').toUpperCase();
 
-        console.log(playRound(playerInputToUpperCase, computerPlay()));
+// event listener
+window.addEventListener('click', keyAction);
 
-        if (roundWinner === 'player') {
-            playerCounter++;
-        } else if (roundWinner === 'computer') {
-            computerCounter++;
-        }
+const result = document.querySelector('div.result');
+
+function keyAction(e) {
+    const pressedKeyValue = e.target.value;
+    if (!pressedKeyValue) return;
+
+    if (computerCounter === 5 || playerCounter === 5) {
+        const newPara = document.createElement('div');
+        newPara.textContent = computerCounter > playerCounter ? "YOU LOST THIS GAME" : "YOU WON THIS GAME!!!";
+        result.appendChild(newPara);
+        //add button here
+        const restartButton = document.createElement('button');
+        restartButton.textContent = 'Restart';
+        restartButton.id = 'restart'
+        result.appendChild(restartButton);
+        const restartBtn = document.getElementById('restart');
+        restartBtn.addEventListener('click', restartGame);
+    } else {
+        const newPara = document.createElement('div');
+        newPara.textContent = playRound(pressedKeyValue);
+        result.appendChild(newPara);
     }
 
-    console.log(playerCounter > computerCounter ? "YOU WON THE GAME!" : playerCounter === computerCounter ?
-        "It's a tie game" : "YOU LOST THE GAME!");
 }
+
+function restartGame(e) {
+    result.textContent = '';
+    playerCounter = 0;
+    computerCounter = 0;
+}
+
