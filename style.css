@@ -61,15 +61,15 @@ button{
     box-shadow: 0 0 1rem #ffc600;
 }
 
-.results {
+.results, .score {
     display: flex;
     align-items: baseline;
     justify-content: center;
-    flex: 1;
     height: 50px;
     font-size: xx-large;
     font-style: italic;
     /*border: 1px solid black;*/
+    flex: 0.3;
 }
 
 .winner{
