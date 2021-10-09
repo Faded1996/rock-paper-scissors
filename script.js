@@ -1,67 +1,104 @@
+function computerPlay() {
+    let randomNumber = Math.floor(Math.random() * 3 + 1);
+    // console.log(randomNumber);
+    switch (randomNumber) {
+        case 1:
+            return "rock";
+        case 2:
+            return "paper";
+        case 3:
+            return "scissors";
+    }
+}
+
 let playerCounter = 0;
 let computerCounter = 0;
 
-function computerPlay() {
-    let randomNumber = Math.floor(Math.random() * 3 + 1);
-    switch (randomNumber) {
-        case 1:
-            return "ROCK";
-        case 2:
-            return "PAPER";
-        case 3:
-            return "SCISSORS";
-    }
-}
-
-function playRound(playerSelection, computerSelection = computerPlay()) {
-
+function playRound(playerSelection, computerSelection) {
+    let r = 'rock';
+    let p = 'paper';
+    let s = 'scissors';
     if (playerSelection === computerSelection) {
-        return `It's a tie. CURRENT: ${playerCounter} : ${computerCounter}`;
-    } else if ((playerSelection === "ROCK" && computerSelection === "SCISSORS")
-        || (playerSelection === "PAPER" && computerSelection === "ROCK")
-        || (playerSelection === "SCISSORS" && computerSelection === "PAPER")) {
+        return `It's a tie`;
+    } else if ((playerSelection === r && computerSelection === s)
+        || (playerSelection === p && computerSelection === r)
+        || (playerSelection === s && computerSelection === p)) {
         playerCounter++;
-        return `You WON! ${playerSelection} beats ${computerSelection}. CURRENT: ${playerCounter} : ${computerCounter}`;
-    } else if ((computerSelection === "ROCK" && playerSelection === "SCISSORS")
-        || (computerSelection === "PAPER" && playerSelection === "ROCK")
-        || (computerSelection === "SCISSORS" && playerSelection === "PAPER")) {
+        return `You WON the round`;
+    } else if ((computerSelection === r && playerSelection === s)
+        || (computerSelection === p && playerSelection === r)
+        || (computerSelection === s && playerSelection === p)) {
         computerCounter++;
-        return `You LOST! ${computerSelection} beats ${playerSelection} CURRENT: ${playerCounter} : ${computerCounter}`;
+        return `You LOST the round`;
+    }
+}
+
+/*  if (playerCounter > computerCounter) {
+      return `You WON the game with SCORE: ${playerCounter} : ${computerCounter}`;
+  } else {
+      return `You LOST the game with SCORE: ${playerCounter} : ${computerCounter}`;
+  }*/
+window.addEventListener('click', playGameRound);
+const buttons = Array.from(document.querySelectorAll('.game-button'));
+// console.log(buttons)
+buttons.forEach(button => button.addEventListener('transitionend', stopTransition));
+
+const divWithResult = document.querySelector('.results');
+
+
+
+function playGameRound(e) {
+    const buttonClicked = e.target;
+    const buttonValuePlayerClicked = e.target.value;
+
+    if (!buttonValuePlayerClicked) return;
+
+    buttonClicked.classList.add('playing');
+    const resultOfTheRound = playRound(buttonValuePlayerClicked, computerPlay());
+
+    divWithResult.textContent = `${resultOfTheRound} ------- Current SCORE: ${playerCounter} : ${computerCounter}`;
+
+    if (computerCounter === 3 || playerCounter === 3) {
+        endGame();
     }
 }
 
 
-// event listener
-window.addEventListener('click', keyAction);
-
-const result = document.querySelector('div.result');
-
-function keyAction(e) {
-    const pressedKeyValue = e.target.value;
-    if (!pressedKeyValue) return;
-
-    if (computerCounter === 5 || playerCounter === 5) {
-        const newPara = document.createElement('div');
-        newPara.textContent = computerCounter > playerCounter ? "YOU LOST THIS GAME" : "YOU WON THIS GAME!!!";
-        result.appendChild(newPara);
-        //add button here
-        const restartButton = document.createElement('button');
-        restartButton.textContent = 'Restart';
-        restartButton.id = 'restart'
-        result.appendChild(restartButton);
-        const restartBtn = document.getElementById('restart');
-        restartBtn.addEventListener('click', restartGame);
+function endGame() {
+    if (playerCounter > computerCounter) {
+        divWithResult.classList.add('winner');
+        divWithResult.textContent = `You WON the game with SCORE ${playerCounter} : ${computerCounter}`;
+        forRestartButtonPlaceHolder.appendChild(restartButton);
     } else {
-        const newPara = document.createElement('div');
-        newPara.textContent = playRound(pressedKeyValue);
-        result.appendChild(newPara);
+        divWithResult.classList.add('looser');
+        divWithResult.textContent = `You LOST the game with SCORE ${playerCounter} : ${computerCounter}`;
+        forRestartButtonPlaceHolder.appendChild(restartButton);
     }
 
+}
+
+function stopTransition(e) {
+    if (e.propertyName !== 'transform') return;
+        e.target.classList.remove('playing');
 }
 
 function restartGame(e) {
-    result.textContent = '';
+    if (e.target.value !== 'restart') {
+        return;
+    }
     playerCounter = 0;
     computerCounter = 0;
+    divWithResult.textContent = "Welcome to the new beginnings";
+    forRestartButtonPlaceHolder.removeChild(restartButton);
+    divWithResult.classList.remove('winner');
+    divWithResult.classList.remove('looser');
 }
+const center = document.querySelector('.center');
 
+/// restart button
+const forRestartButtonPlaceHolder = document.querySelector('.for-restart-button');
+const restartButton = document.createElement('button');
+restartButton.classList.add('restart-button')
+restartButton.value = 'restart';
+restartButton.textContent = "Restart";
+restartButton.addEventListener('click',restartGame);

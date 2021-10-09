@@ -1,0 +1,99 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+
+}
+
+.header {
+    height: 50px;
+    background: darkslategrey;
+    color: aliceblue;
+    font-family: "Courier New", sans-serif;
+    font-size: 38px;
+    font-weight: bolder;
+    text-align: center;
+    padding: 50px 1px;
+}
+
+div.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.footer {
+    background: #716c6c;
+    display: flex;
+    justify-content: center;
+    font-size: 17px;
+    font-style: italic;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+button{
+    width: 10rem;
+    height: 10rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+    border: .4rem solid black;
+    transition: all .1s ease;
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+.results {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex: 1;
+    height: 50px;
+    font-size: xx-large;
+    font-style: italic;
+    /*border: 1px solid black;*/
+}
+
+.winner{
+    color: red;
+}
+
+.looser{
+    color: sandybrown;
+}
+
+.restart-button{
+    width: 10rem;
+    height: 10rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+    border: .4rem solid black;
+    transition: all .1s ease;
+    background: sandybrown;
+}
+.for-restart-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
