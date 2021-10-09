@@ -79,7 +79,6 @@ function hideGameButtons() {
 }
 
 function refreshPage() {
-    // code here
     location.reload();
 }
 

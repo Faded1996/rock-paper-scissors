@@ -1,7 +1,8 @@
-html, body{
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 body {
@@ -17,13 +18,15 @@ body {
     background: darkslategrey;
     color: aliceblue;
     font-family: "Courier New", sans-serif;
-    font-size: 38px;
+    font-size: 58px;
     font-weight: bolder;
     text-align: center;
     padding: 50px 1px;
+    box-shadow: 3px 4px 16px rgba(21, 16, 16, 0.35);
+
 }
 
-div.center {
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +41,7 @@ div.center {
     font-size: 17px;
     font-style: italic;
     padding: 10px;
+    color: whitesmoke;
 }
 
 button{
@@ -47,13 +51,22 @@ button{
     padding: 1rem .5rem;
     border-radius: .5rem;
     border: .4rem solid black;
-    transition: all .1s ease;
+    transition: all .12s ease;
+}
+
+.rock {
+    background: #716c6c;
+    color: whitesmoke;
+}
+.scissors {
+    background: red;
+    color: cyan;
 }
 
 .playing {
     transform: scale(1.1);
-    border-color: #ffc600;
-    box-shadow: 0 0 1rem #ffc600;
+    border-color: whitesmoke;
+    box-shadow: 0 0 1rem #8c8686;
 }
 
 .results, .score {
@@ -62,7 +75,6 @@ button{
     justify-content: center;
     height: 50px;
     font-size: xx-large;
-    font-style: italic;
     /*border: 1px solid black;*/
     flex: 0.3;
 }
@@ -92,3 +104,10 @@ button{
     flex: 1;
 }
 
+.score{
+    font-style: normal;
+    font-size: xxx-large;
+    font-weight: bold;
+    text-shadow: 4px 5px 5px rgba(82, 74, 74, 0.42);
+
+}
