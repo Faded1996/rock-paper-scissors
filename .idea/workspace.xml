@@ -33,7 +33,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JavaScript30/01 - JavaScript Drum Kit/index-FINISHED.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JavaScript30/02 - JS and CSS Clock" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,7 +44,8 @@
       <option name="presentableId" value="Default" />
       <updated>1633704913938</updated>
       <workItem from="1633704915832" duration="1873000" />
-      <workItem from="1633717581005" duration="15256000" />
+      <workItem from="1633717581005" duration="15491000" />
+      <workItem from="1633784969789" duration="2467000" />
     </task>
     <servers />
   </component>
@@ -61,5 +62,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

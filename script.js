@@ -33,9 +33,11 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+const center = document.querySelector('.center');
 const buttons = Array.from(document.querySelectorAll('button'));
 const divWithResult = document.querySelector('.results');
 const divWIthScore = document.querySelector('.score');
+const score = document.querySelector('.score');
 
 window.addEventListener('click', playGameRound);
 buttons.forEach(button => button.addEventListener('transitionend', stopTransition));
@@ -62,12 +64,25 @@ function endGame() {
         divWithResult.classList.add('winner');
         divWithResult.textContent = `You WON the game with SCORE ${playerCounter} : ${computerCounter}`;
         restartButtonPlaceHolder.appendChild(restartButton);
+        hideGameButtons();
     } else {
         divWithResult.classList.add('looser');
         divWithResult.textContent = `You LOST the game with SCORE ${playerCounter} : ${computerCounter}`;
         restartButtonPlaceHolder.appendChild(restartButton);
+        hideGameButtons();
     }
 }
+
+function hideGameButtons() {
+   center.style.display = 'none';
+    score.style.display = 'none';
+}
+
+function refreshPage() {
+    // code here
+    location.reload();
+}
+
 
 function stopTransition(e) {
     if (e.propertyName !== 'transform') return;
@@ -78,6 +93,7 @@ function restartGame(e) {
     if (e.target.value !== 'restart') {
         return;
     }
+    refreshPage();
     playerCounter = 0;
     computerCounter = 0;
     divWithResult.textContent = "Welcome to the new beginnings";
@@ -91,5 +107,14 @@ const restartButton = document.createElement('button');
 
 restartButton.classList.add('restart-button')
 restartButton.value = 'restart';
-restartButton.textContent = "Restart";
+restartButton.innerHTML = `Restart<br> <span style='font-size: 14px'>press Enter</span>`;
 restartButton.addEventListener('click', restartGame);
+
+//listener for Enter
+window.addEventListener('keydown', pressEnter);
+
+function pressEnter(e) {
+    if (e.keyCode === 13) {
+        refreshPage();
+    }
+}
